@@ -476,3 +476,102 @@ body.modal-open { overflow: hidden; }
   max-width:700px;
   margin:0 auto;
 }
+
+/* Vertically & horizontally center the content inside #home */
+#home.vcenter {
+  min-height: max(60vh, calc(100vh - var(--header-h)));
+  display: grid;                 /* vertical centering */
+  place-items: center;           /* centers the container */
+}
+
+/* Make the h2 itself centered */
+#home .center-box { 
+  text-align: center;            /* horizontal centering of text */
+}
+
+/* (Optional) remove default top margin on h2 so it sits perfectly centered */
+#home h2 { 
+  margin: 50% 0;
+  font-size:3rem;
+}
+
+/* Make sure arrows sit above the slide area */
+.caro-viewport { position: relative; z-index: 1; }
+.caro-btn { z-index: 2; }
+
+/* Ensure the carousel fills width so the left edge isn’t off-screen */
+.carousel { position: relative; width: 100%; }
+.caro-viewport { width: 100%; overflow: hidden; }
+
+/* Bring the arrows slightly inward from the edges */
+.caro-prev { left: 12px; }
+.caro-next { right: 12px; }
+
+/* If your container adds horizontal padding, allow arrows to overlap it */
+.stripe .container { position: relative; }
+
+/* Visibility boost (optional) */
+.caro-btn {
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  /* if your slides are bright, make button bg a touch more opaque */
+  background: rgba(15,17,22,.9);
+}
+
+/* Footer layout: text left, icons right (and centered on small screens) */
+.site-footer .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+  /* make sure absolutely-positioned elements (e.g., carousel arrows) don't overlap */
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer .copyright{
+  margin: 0;
+  color: var(--footer-fg);
+  text-align: center; /* will center when stacked on mobile */
+  flex: 1 1 auto;
+}
+
+/* Social icons row */
+.social{
+  list-style: none;
+  display: flex;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+/* Make the icon buttons visible on dark background */
+.social a{
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.18);    /* brighter than before */
+  color: #fff;                            /* icon color */
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+
+.social a:hover,
+.social a:focus{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.28);
+}
+
+.social i{ font-size: 18px; line-height: 1; }
+
+/* Stack on narrow screens so nothing gets pushed off-canvas */
+@media (max-width: 640px){
+  .site-footer .container{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
