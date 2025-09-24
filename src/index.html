@@ -4,10 +4,335 @@
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MP1</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/J6MdGgm6XJ9Yk2e3I1p2VqCqVqP2sNQEFjvKQm8QzJt3A7QirUQq0i6ktMqv4YFZ8+fN4Yxwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>CS409 MP1- Aniruddha</title>
     </head>
     <body>
-        <h1>Hello World! Welcome to MP1!</h1>
-        <img src="assets/image.jpg">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <!-- ===== NAV ===== -->
+        <header class="site-header" role="banner">
+            <div class="container">
+            <h1 class="logo">FC Barcelona</h1>
+            <nav class="site-nav" aria-label="Primary">
+                <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#squad">Squad</a></li>
+                <li><a href="#honours">Honours</a></li>
+                <!-- <li><a href="#contact">Contact</a></li> -->
+                </ul>
+            </nav>
+            </div>
+        </header>
+
+        <main id="main" role="main">
+            <!-- ===== HOME ===== -->
+            <section id="home" class="stripe vcenter bg-fixed hero-fixed">
+            <div class="container center-box">
+                <h2>⚽ FC Barcelona - Més que un club</h2>
+            </div>
+            </section>
+
+            <!-- ===== ABOUT ===== -->
+            <section id="about" class="stripe ">
+            <div class="container" id="about-container">
+                <p>
+                    Founded in <strong>1899</strong>, FC Barcelona is more than a football club - it is a symbol of passion, culture, and pride. 
+                    From the artistry of <em>Johan Cruyff</em> to the golden era of <em>Messi, Xavi, and Iniesta</em>, Barça has shaped the beautiful game 
+                    with its tiki-taka style and unforgettable triumphs. Wearing the iconic <span style="color:#ffcc00;">blaugrana</span> colors, 
+                    the club inspires millions through its legendary victories, the famed <strong>La Masia</strong> academy, and its motto: 
+                    <em>“Més que un club”</em> — More than a club.
+                </p>
+            </div>
+            </section>
+
+            <!-- ===== TEAM ===== -->
+            <section id="team" class="stripe">
+            <div class="container">
+                <h2>Team</h2>
+
+                <div class="carousel" aria-roledescription="carousel">
+                <button class="caro-btn caro-prev" aria-label="Previous slide" type="button">❮</button>
+
+                <div class="caro-viewport" tabindex="0" aria-live="polite">
+                    <ul class="caro-track">
+                    <!-- Slide 1 -->
+                    <li class="caro-slide">
+                        <img src="./assets/pedri.webp" alt="Pedri">
+                        <div class="caro-caption">Pedri</div>
+                    </li>
+                    <!-- Slide 2 -->
+                    <li class="caro-slide">
+                        <img src="./assets/fermin.webp" alt="Fermin">
+                        <div class="caro-caption">Fermin</div>
+                    </li>
+                    <!-- Slide 3 -->
+                    <li class="caro-slide">
+                        <img src="./assets/rapha.webp" alt="Raphinha">
+                        <div class="caro-caption">Raphinha</div>
+                    </li>
+                    <!-- Slide 4 -->
+                    <li class="caro-slide">
+                        <img src="./assets/yamal.webp" alt="Lamine">
+                        <div class="caro-caption">Lamine</div>
+                    </li>
+                    </ul>
+                </div>
+
+                <button class="caro-btn caro-next" aria-label="Next slide" type="button">❯</button>
+                </div>
+            </div>
+            </section>
+
+            <!-- ===== SQUAD 2025/26 ===== -->
+            <section id="squad" class="stripe">
+            <div class="container">
+                <h2>Squad 2025/26</h2>
+                <div class="multicol">
+                    <p><strong>Goalkeepers</strong> Marc-André ter Stegen, Wojciech Szczęsny, Joan Garcia.</p>
+                    <p><strong>Defenders</strong> Pau Cubarsí, Alejandro Balde, Ronald Araujo, Andreas Christensen, Gerard Martín, Jules Kounde, Eric García.</p>
+                    <p><strong>Midfielders</strong> Gavi, Pedri, Fermín López, Marc Casadó, Frenkie de Jong, Dani Olmo, Marc Bernal.</p>
+                    <p><strong>Forwards</strong> Ferran Torres, Robert Lewandowski, Lamine Yamal, Raphinha, Marcus Rashford, Roony Bardghji.</p>
+                </div>
+            </div>
+            </section>
+
+            <!-- ===== HONOURS ===== -->
+            <section id="honours" class="stripe">
+            <div class="container">
+                <h2>Honours</h2>
+                <p>Very few clubs anywhere in the world have won so many titles.
+                    Click the button to open a modal window with details on major trophies.</p>
+                <button class="btn open-modal" data-modal-target="#infoModal" type="button">
+                Honours
+                </button>
+            </div>
+
+            <!-- Modal  -->
+            <div id="infoModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal__backdrop" data-modal-close></div>
+            <div class="modal__panel" role="document">
+                <header class="modal__header">
+                <h3 id="modal-title">Honours & Trophies — FC Barcelona</h3>
+                <button class="modal__close" data-modal-close aria-label="Close modal" type="button">✕</button>
+                </header>
+
+                <div class="modal__body">
+                <p class="sr-only">List of major trophies won by FC Barcelona with seasons.</p>
+                <ul class="trophy-list" role="list">
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>FIFA Club World Cup — 3</strong><br />
+                        <small>2009-10, 2011-12, 2015-16</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>European Super Cup — 5</strong><br />
+                        <small>1992-93, 1997-98, 2009-10, 2011-12, 2015-16</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Spanish League Championship (La Liga) — 28</strong><br />
+                        <small>1928-29, 1944-45, 1947-48, 1948-49, 1951-52, 1952-53, 1958-59, 1959-60, 1973-74, 1984-85, 1990-91, 1991-92, 1992-93, 1993-94, 1997-98, 1998-99, 2004-05, 2005-06, 2008-09, 2009-10, 2010-11, 2012-13, 2014-15, 2015-16, 2017-18, 2018-19, 2022-23, 2024-25</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Copa del Rey — 32</strong><br />
+                        <small>1909-10, 1911-12, 1912-13, 1919-20, 1921-22, 1924-25, 1925-26, 1927-28, 1941-42, 1950-51, 1951-52, 1952-53, 1956-57, 1958-59, 1962-63, 1967-68, 1970-71, 1977-78, 1980-81, 1982-83, 1987-88, 1989-90, 1996-97, 1997-98, 2008-09, 2011-12, 2014-15, 2015-16, 2016-17, 2017-18, 2020-21, 2024-25</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Spanish Super Cup — 15</strong><br />
+                        <small>1983-84, 1991-92, 1992-93, 1994-95, 1996-97, 2005-06, 2006-07, 2009-10, 2010-11, 2011-12, 2013-14, 2016-17, 2018-19, 2022-23, 2024-25</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Spanish League Cup — 2</strong><br />
+                        <small>1982-83, 1985-86</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Mediterranean League — 1</strong><br />
+                        <small>1937</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Catalan League — 1</strong><br />
+                        <small>1937-38</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Catalan League Championship — 23</strong><br />
+                        <small>1901-02, 1902-03, 1904-05, 1908-09, 1909-10, 1910-11, 1912-13, 1915-16, 1918-19, 1919-20, 1920-21, 1921-22, 1923-24, 1924-25, 1925-26, 1926-27, 1927-28, 1929-30, 1930-31, 1931-32, 1934-35, 1935-36, 1937-38 (incl. Copa Macaya 1901-02 & Copa Barcelona 1902-03)</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Catalan Super Cup — 2</strong><br />
+                        <small>2014-15, 2017-18</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Catalan Cup — 8</strong><br />
+                        <small>1990-91, 1992-93, 1999-00, 2003-04, 2004-05, 2006-07, 2012-13, 2013-14 (until 1993-94, Copa Generalitat)</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Eva Duarte Cup — 3</strong><br />
+                        <small>1948-49, 1951-52, 1952-53</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Pyrenees Cup — 4</strong><br />
+                        <small>1909-10, 1910-11, 1911-12, 1912-13</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Latin Cup — 2</strong><br />
+                        <small>1948-49, 1951-52</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>European Cup Winners’ Cup — 4</strong><br />
+                        <small>1978-79, 1981-82, 1988-89, 1996-97</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Fairs Cup — 3</strong><br />
+                        <small>1957-58, 1959-60, 1965-66</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>Fairs Super Cup — 1</strong><br />
+                        <small>1971-72</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+
+                    <li>
+                    <figure>
+                        <figcaption>
+                        <strong>UEFA Champions League — 5</strong><br />
+                        <small>1991-92, 2005-06, 2008-09, 2010-11, 2014-15</small>
+                        </figcaption>
+                    </figure>
+                    </li>
+                </ul>
+                </div>
+
+                <footer class="modal__footer">
+                <button class="btn" data-modal-close type="button">Got it</button>
+                </footer>
+            </div>
+            </div>
+
+            <div class="container">
+                <br>
+                <div class="video-wrap fade-in-up delay-1">
+                <video class="video" controls playsinline preload="metadata"
+                        poster="assets/messi-poster.jpg" aria-label="Project demo">
+                    <source src="assets/FCB.mp4" type="video/mp4">
+                    <source src="assets/Goal.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="video-caption"><i class="fa-regular fa-circle-play"></i> FC Barcelona - The treble celebrations at Camp Nou </p>
+                </div>
+            </div>
+            </section>            
+
+            <!-- ===== CONTACT ===== -->
+            <!-- <section id="contact" class="stripe">
+            <div class="container">
+                <ul class="social">
+                    <li><a href="https://github.com/Aniruddha8699" aria-label="GitHub">
+                        <i class="fa-brands fa-github">Github</i>
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/in/aniruddha-sonawane" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin">Linkedin</i>
+                    </a></li>
+                    <li><a href="https://twitter.com/" aria-label="Twitter / X">
+                        <i class="fa-brands fa-x-twitter">Twitter</i>
+                    </a></li>
+                    <li><a href="mailto:ans18@illinois.edu" aria-label="Email">
+                        <i class="fa-solid fa-envelope">Mail</i>
+                    </a></li>
+                </ul>
+                <h2>Contact</h2>
+                <p>CTA, form, or contact info.</p>
+            </div>
+            </section> -->
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+            <p>&copy; 2025 Aniruddha Sonawane • All rights reserved.</p>
+            </div>
+        </footer>
     </body>
 </html>

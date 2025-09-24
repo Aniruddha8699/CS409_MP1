@@ -1,1 +1,478 @@
-/* Your SCSS here. */
+/* ===== Base & Variables ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6; color: #111;
+  padding-top: var(--header-h);
+}
+
+/* Design tokens */
+:root{
+  --maxw: 1100px;
+  --pad-y: clamp(3rem, 6vh, 6rem);
+  --stripe-a: #ffffff;
+  --stripe-b: #f6f7fb;
+
+  --header-bg: #0e1116;
+  --header-fg: #ffffff;
+
+  --footer-bg: #0e1116;
+  --footer-fg: #cfd3da;
+
+  --link: #0b5fff;
+
+  --header-h-large: 88px;
+  --header-h-compact: 56px;
+
+  --header-h: var(--header-h-large);
+}
+
+/* Avoid horizontal scroll on decorative overflow */
+html, body { overflow-x: hidden; }
+
+/* Generic centered content wrapper */
+.container {
+  width: min(var(--maxw), 92vw);
+  margin-inline: auto;
+}
+
+/* ===== Accessibility ===== */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: #000; color: #fff; padding: .5rem .75rem; border-radius: .25rem;
+}
+.skip-link:focus { left: .5rem; top: .5rem; z-index: 10000; }
+
+/* ===== Header (Fixed “Sticky”) =====
+   Using position: fixed for maximum reliability across wrappers/overflow.
+   Body gets top padding so content isn't hidden behind the header.
+*/
+body { padding-top: var(--header-h); }
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 1000;
+  background: var(--header-bg);
+  color: var(--header-fg);
+  /* subtle elevation so it reads as a bar */
+  box-shadow: 0 6px 14px rgba(0,0,0,.18);
+  /* smooth feel if you later tweak compact states */
+  transition: height .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.site-header:not(.is-compact) .logo         { font-size: 1.5rem; }
+.site-header:not(.is-compact) .site-nav a   { font-size: 1rem;  }
+
+.site-header.is-compact { /* height is still from --header-h, JS updates it */ }
+.site-header.is-compact .logo               { font-size: 1.1rem; }
+.site-header.is-compact .site-nav a         { font-size: 0.9rem; }
+
+.site-header .container {
+  height: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-inline: 0; /* padding handled by container width, not needed here */
+}
+
+.logo { margin: 0; font-weight: 800; letter-spacing: .2px; transition: font-size .18s ease; }
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; }
+.site-nav a { color: var(--header-fg); text-decoration: none; font-weight: 700; transition: font-size .18s ease; }
+.site-nav a:hover, .site-nav a:focus { text-decoration: underline; }
+
+/* Active state for the nav item that reflects reading position */
+.site-nav a.is-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 800;
+}
+
+/* ===== Sections (Full-width Stripes) ===== */
+.stripe {
+  width: 100%;
+  padding-block: var(--pad-y);
+  /* Ensure in-page anchor jumps account for fixed header */
+  scroll-margin-top: calc(var(--header-h) + 8px);
+}
+.stripe:nth-of-type(odd) { background: var(--stripe-a); }
+.stripe:nth-of-type(even){ background: var(--stripe-b); }
+
+/* Example section content */
+h2 { margin-top: 0; font-size: clamp(1.5rem, 2.5vw, 2.25rem); }
+p  { max-width: 70ch; }
+
+/* ===== Footer ===== */
+.site-footer {
+  width: 100%;
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+}
+.site-footer .container { padding-block: 1.5rem; }
+.site-footer a { color: var(--link); }
+
+/* ===== Carousel ===== */
+.carousel {
+  position: relative;
+  user-select: none;
+}
+.caro-viewport {
+  overflow: hidden;
+  border-radius: 16px;
+  outline: none;
+}
+.caro-track {
+  display: flex;
+  margin: 0; padding: 0; list-style: none;
+  transition: transform 300ms ease;
+}
+.caro-slide {
+  min-width: 100%;
+  position: relative;
+}
+.caro-slide img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 45vh, 520px);
+  object-fit: cover;
+}
+.caro-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: .6rem .9rem;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Arrows */
+.caro-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 999px; border: none;
+  background: rgba(15,17,22,.75);
+  color: #fff; font-size: 20px; line-height: 1; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.caro-btn:hover, .caro-btn:focus {
+  background: rgba(15,17,22,.92);
+}
+.caro-prev { left: 8px; }
+.caro-next { right: 8px; }
+
+/* Respect reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .caro-track { transition: none; }
+}
+
+/* ===== Multi-column layout ===== */
+.multicol {
+  column-gap: 2rem;
+  /* desktop default */
+  column-count: 3;
+}
+.multicol p { break-inside: avoid; margin: 0 0 1rem 0; }
+
+/* responsive columns */
+@media (max-width: 1100px) {
+  .multicol { column-count: 2; }
+}
+@media (max-width: 700px) {
+  .multicol { column-count: 1; }
+}
+
+/* ===== Universal content centering for stripes ===== */
+.stripe .container{
+  /* center the whole section’s content horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* horizontal centering of block children */
+  text-align: center;      /* horizontal centering of inline text */
+  gap: 1rem;
+}
+
+/* Make common media auto-center & scale */
+.stripe img,
+.stripe video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* ===== Vertically centered section =====
+   Add class="vcenter" to ONE section (e.g., #home).
+   Stays centered even if header height or viewport changes.
+*/
+.vcenter{
+  /* fill the viewport minus the fixed header, but never too small */
+  min-height: max(60vh, calc(100vh - var(--header-h)));
+  display: grid;
+  place-items: center;     /* perfectly center the child box */
+}
+.vcenter .center-box{
+  /* optional width control for the centered element */
+  width: min(900px, 92vw);
+}
+
+/* ===== Responsive tuning for required resolutions =====
+   These adjust container width, paddings, and nav readability.
+*/
+
+/* ≥ 1367px (covers 1920×1080 comfortably) */
+@media (min-width: 1367px){
+  :root{
+    --maxw: 1200px;
+    --pad-y: clamp(3.5rem, 7vh, 7rem);
+  }
+}
+
+/* ≤ 1366px (1366×768) */
+@media (max-width: 1366px){
+  :root{
+    --maxw: 1060px;
+    --pad-y: clamp(3rem, 6vh, 5.5rem);
+  }
+}
+
+/* ≤ 1280px (1280×720) */
+@media (max-width: 1280px){
+  :root{
+    --maxw: 980px;
+  }
+  /* keep nav readable on narrower widths */
+  .site-nav ul{ gap: .75rem; flex-wrap: wrap; justify-content: center; }
+}
+
+/* ≤ 1024px (1024×768) */
+@media (max-width: 1024px){
+  :root{
+    --maxw: 880px;
+    --pad-y: clamp(2.5rem, 5vh, 4.5rem);
+  }
+  /* slightly smaller nav text in compact space */
+  .site-header:not(.is-compact) .site-nav a { font-size: .95rem; }
+  .site-header.is-compact .site-nav a       { font-size: .85rem; }
+}
+
+/* ≤ 768px (phones/tablets portrait; nice to have) */
+@media (max-width: 768px){
+  :root{ --maxw: 680px; }
+  h2{ font-size: clamp(1.35rem, 4.5vw, 1.75rem); }
+}
+
+/* ===== Fixed background stripe ===== */
+.bg-fixed {
+  position: relative;
+  color: #fff;                    /* text readable on photo */
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  /* The background image — CHANGE THIS URL to your own asset */
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* core requirement */
+  /* Give it some height to appreciate the effect */
+  min-height: 60vh;
+}
+
+/* iOS Safari fallback (background-attachment: fixed is unreliable) */
+@supports (-webkit-touch-callout: none) {
+  .bg-fixed {
+    background-attachment: scroll;
+  }
+  .bg-fixed::before {
+    content: "";
+    position: fixed; inset: 0;
+    z-index: -1;                   /* sit behind section content */
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(.85);
+  }
+}
+
+/* Optional: slightly stronger overlay for readability */
+.bg-fixed::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.25));
+  pointer-events: none;
+}
+.bg-fixed .container {
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(320px, 45vh, 640px);
+}
+.bg-fixed .btn {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.4);
+  padding: .6rem 1rem; border-radius: 10px;
+  color: #fff; text-decoration: none; font-weight: 700;
+}
+.bg-fixed .btn:hover { background: rgba(255,255,255,.25); }
+
+/* ===== Modal base ===== */
+.modal[aria-hidden="true"] { display: none; }
+.modal[aria-hidden="false"] { display: block; }
+
+.modal {
+  position: fixed; inset: 0; z-index: 2000;
+}
+
+.modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(1px);
+}
+
+.modal__panel {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 92vw);
+  max-height: 85vh;
+  background: #fff; color: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+  display: grid; grid-template-rows: auto 1fr auto;
+}
+
+.modal__header, .modal__footer {
+  padding: 1rem 1.25rem;
+  background: #f6f7fb;
+}
+.modal__body {
+  padding: 1rem 1.25rem;
+  overflow: auto;
+}
+
+.modal__close {
+  appearance: none;
+  border: none; background: transparent; cursor: pointer;
+  font-size: 1.1rem; line-height: 1;
+  padding: .25rem .5rem; border-radius: 8px;
+}
+.modal__close:hover, .modal__close:focus {
+  background: rgba(0,0,0,.06);
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open { overflow: hidden; }
+
+/* Optional button baseline, if you don’t have one */
+.btn {
+  appearance: none; border: none; cursor: pointer;
+  background: #0b5fff; color: #fff; border-radius: 10px;
+  padding: .6rem 1rem; font-weight: 700; text-decoration: none;
+}
+.btn:hover, .btn:focus { filter: brightness(1.05); }
+
+/* Ensure carousel stretches even inside flex-centered containers */
+.carousel { width: 100%; }
+.caro-viewport { width: 100%; }
+.caro-track { will-change: transform; } /* smoother + hints layout engine */
+
+/* ==== Responsive video ==== */
+.video-wrap { width: min(1100px, 92vw); }
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+}
+.video-caption {
+  margin-top: .5rem;
+  color: #555;
+}
+
+/* ==== CSS3 animations (fade/slide in) ==== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  opacity: 0;                 /* start hidden to show animation */
+  animation: fadeInUp .6s ease-out forwards;
+}
+.delay-1 { animation-delay: .12s; }
+.delay-2 { animation-delay: .24s; }
+
+/* You already have transitions on nav; this adds explicit animation usage */
+
+/* ==== Social icons in footer ==== */
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.social {
+  list-style: none;
+  display: flex;
+  gap: .85rem;
+  margin: 0; padding: 0;
+}
+.social a {
+  display: grid; place-items: center;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: var(--footer-fg);
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+}
+.social a:hover, .social a:focus {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.2);
+  color: #fff;
+}
+.social i { font-size: 18px; line-height: 1; }
+
+/* Tweak for small screens so footer stacks nicely */
+@media (max-width: 640px){
+  .site-footer .container { justify-content: center; text-align: center; }
+}
+
+
+/* Fixed background for the hero */
+.hero-fixed {
+  /* change to your file path */
+  background-image: url("./../assets/logo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* key line for the effect */
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  min-height: max(60vh, calc(100vh - var(--header-h)));
+}
+
+/* Optional: gentle overlay for readability */
+.hero-fixed::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.25));
+  pointer-events: none;
+}
+
+/* Make sure the inner container centers nicely */
+.hero-fixed .container {
+  min-height: clamp(320px, 45vh, 640px);
+  align-items: center;
+  justify-content: center;
+}
+
+.about-container{
+  font-size:1.1rem;
+  line-height:1.6;
+  max-width:700px;
+  margin:0 auto;
+}
